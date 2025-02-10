@@ -1,5 +1,5 @@
 hello world!
 
-#Site map
+# Site map
 -Home(This page)
  -[note](https://raspy-windbird.github.io/notes/)
