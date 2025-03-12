@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width",initial-scale=1>
+    <title>Countdown</title>
+      
+<style type="text/css">
+  /*書式初期化*/
+  html,body,h1,h2,h3,h4,ul,ol,dl,li,dt,dd,p,div,span,img,a,table,tr,th,td {
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+/*フォント設定*/
+  color:#FFFFFF;
+  font-size: 300%;
+  text-align: center;
+  font-family: 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+        
+</style>
+
+  </head>
+    
+  <body>
+    <span class="C9DxTc " style="">豊田中 吹奏楽部 定期演奏会まで</span>
+    <div id="countOutput"></div>
+    <script LANGUAGE="JavaScript">
+     function dateCounter() {
+ 
+    var timer = setInterval(function() {
+    //現在の日時取得
+    var nowDate = new Date();
+    //カウントダウンしたい日を設定
+    var anyDate = new Date("2025/3/20 13:30:00");
+    //日数を計算
+    var daysBetween = Math.ceil((anyDate - nowDate)/(1000*60*60*24)-1);
+    var ms = (anyDate - nowDate);
+    if (ms >= 0) {
+        //時間を取得
+        var h = Math.floor(ms / 3600000);
+        var _h = h % 24;
+        //分を取得
+        var m = Math.floor((ms - h * 3600000) / 60000);
+        //秒を取得
+        var s = Math.round((ms - h * 3600000 - m * 60000) / 1000);
+ 
+        //HTML上に出力
+        document.getElementById("countOutput").innerHTML = daysBetween + "日と" +_h + "時間" + m + "分" +s + "秒";
+ 
+        if ((h == 0) && (m == 0) && (s == 0)) {
+        clearInterval(timer);
+        document.getElementById("countOutput").innerHTML = "開演";
+        }
+    }else{
+        document.getElementById("countOutput").innerHTML = "終了しました";
+    }
+    }, 1000);
+}
+dateCounter();
+    </script>  
+      
+  </body>
+    
+</html>
