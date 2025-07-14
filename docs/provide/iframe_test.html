@@ -1,6 +1,11 @@
 <input id="src"></input>
+<button id="button"></button>
 <iframe id="myIframe"></iframe>
 <script>
+  var button = document.getElementById("button");
+  button.addEventListener("click", function(e) {
+  e.preventDefault();
   var url = document.getElementById('src').value;
   document.getElementById('myIframe').src = url;
+  }
 </script>
