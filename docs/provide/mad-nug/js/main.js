@@ -1,3 +1,3 @@
-import create from "./js/create.js";
+import create from "./create.js";
 
 create("input","boot",{type:"button",value:"SYSTEM"});
