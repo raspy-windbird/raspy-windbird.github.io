@@ -4,9 +4,8 @@ function create (ele,origin_id,attribute) {
     // attribute: 変更したい要素を「value,hellow」のようなペアで入れる
     const element = document.createElement(ele);
 
-    //forでディクショナリのattributeを処理
     for (let key in attribute){
-        element.setAttribute(key,attribute);
+        element.setAttribute(key,JSON.stringify(attribute));
     }
 
     document.getElementById(origin_id).appendChild(element);
