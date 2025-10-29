@@ -11,3 +11,5 @@ function create (ele,origin_id,attribute) {
 
     document.getElementById(origin_id).appendChild(element);
 }
+
+export default create;
