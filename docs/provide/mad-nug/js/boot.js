@@ -10,6 +10,7 @@ function boot(){
 async function boot_button(){
     await create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
     await button_clicked();
+    await async (()=> {button.remove();})
 }
 
 async function button_clicked (){
@@ -17,10 +18,9 @@ async function button_clicked (){
     const button = document.getElementById("boot_button");
     if (button) {
         button.addEventListener("click", () => {
-            console.log("ボタンがクリックされました（一度だけ実行）");
+            console.log("起動");
         }, { once: true });
-    }
-});
+    }});
 }
 
 /*
