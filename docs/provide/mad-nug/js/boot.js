@@ -1,16 +1,10 @@
-import create from "./assets/dom.js";
+import dom from "./assets/dom.js";
 
-function boot(){
-    boot_button();
-}
-
-
-////sub////
-//boot_button//
-async function boot_button(){
-    await create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
+async function boot(){
+    const Dom = new dom();
+    await Dom.create("input","boot",{type:"button",value:"SYSTEM",id:"boot"});
     
-    const button = document.getElementById("boot_button");
+    const button = document.getElementById("boot");
     
     await button_clicked(button);
     await button.remove();
@@ -21,7 +15,7 @@ async function button_clicked (ele){
     
     if (ele) {
         ele.addEventListener("click", () => {
-            console.log("起動");
+            console.log("/boot.js ---SYSTEM STARTED---");
         }, { once: true });
     }});
 }
@@ -42,5 +36,4 @@ function boot_button(){
 }
 */
 
-//boot export
 export default boot;

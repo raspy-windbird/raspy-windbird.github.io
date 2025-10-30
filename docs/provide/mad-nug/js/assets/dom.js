@@ -1,4 +1,5 @@
-function create (ele,origin_id,attribute) {
+class dom {
+create (ele,origin_id,attribute) {
     // ele: 作りたい要素のタグ「h1」など
     // origin_id: 親となる要素のid
     // attribute: 変更したい要素を「value,hellow」のようなペアで入れる
@@ -11,5 +12,6 @@ function create (ele,origin_id,attribute) {
 
     document.getElementById(origin_id).appendChild(element);
 }
+}
 
-export default create;
+export default dom;
