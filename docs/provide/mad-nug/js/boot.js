@@ -15,10 +15,29 @@ async function boot_button(){
 async function button_create(){
     create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
 }
+/*
 async function button_clicked (){
     const button = document.getElementById("boot_button");
     button.addEventListener("click",function(){});
 }
+*/
+
+async function button_clicked (){
+    document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById("boot_button");
+
+    if (button) {
+        button.addEventListener("click", () => {
+            console.log("ボタンがクリックされました（一度だけ実行）");
+        }, { once: true });
+    }
+});
+}
+
+
+
+
+
 
 /*
 function boot_button(){
