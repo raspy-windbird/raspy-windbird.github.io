@@ -15,9 +15,9 @@ async function boot_button(){
 async function button_create(){
     create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
 }
-async function button_clicked (resolve){
+async function button_clicked (){
     const button = document.getElementById("boot_button");
-    button.addEventListener("click",resolve);
+    button.addEventListener("click",function(){});
 }
 
 /*
