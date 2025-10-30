@@ -2,7 +2,7 @@ import dom from "./assets/dom.js";
 
 
 
-async function boot(){
+export async function boot(){
     const button_id = "boot";
     const Dom = new dom();
     Dom.create("input","boot",{type:"button",value:"SYSTEM",id:button_id});
@@ -23,7 +23,6 @@ async function clicked (ele){
     }});
 }
 */
-[]
 /*
 function boot_button(){
     create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
@@ -39,5 +38,3 @@ function boot_button(){
     )
 }
 */
-
-export default boot;

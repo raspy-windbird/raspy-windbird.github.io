@@ -1,5 +1,5 @@
-import startup from "./startup.js";
-import boot from "./boot.js";
+import {startup} from "./startup.js";
+import {boot} from "./boot.js";
 
 console.log("main.js ---LOADING startup.js---");
 startup();

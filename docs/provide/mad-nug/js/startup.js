@@ -1,11 +1,7 @@
-async function startup(){
+export async function startup(){
     console.log("startup.js ---STANDBY---");
     document.addEventListener("click", () => {
         
     });
 
 }
-
-
-
-export default startup;
