@@ -1,4 +1,4 @@
-import create from "./create.js";
+import create from "./assets/dom.js";
 
 function boot(){
     boot_button();
