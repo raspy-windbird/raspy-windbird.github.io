@@ -1,24 +1,29 @@
 import dom from "./assets/dom.js";
 
+
+
 async function boot(){
+    const button_id = "boot";
     const Dom = new dom();
-    Dom.create("input","boot",{type:"button",value:"SYSTEM",id:"boot"});
-    
-    const button = document.getElementById("boot");
-    await button_clicked(button);
+    Dom.create("input","boot",{type:"button",value:"SYSTEM",id:button_id});
+    const button = document.getElementById(button_id);
+    Dom.clicked(button,console.log("click");,True);
 }
 
-async function button_clicked (ele){
+
+/*
+async function clicked (ele){
     document.addEventListener('DOMContentLoaded', () => {
     
     if (ele) {
         ele.addEventListener("click", () => {
-            console.log("./boot.js ---SYSTEM STARTED---");
+            console.log("boot.js ---SYSTEM STARTED---");
             ele.remove();
         }, { once: true });
     }});
 }
-
+*/
+[]
 /*
 function boot_button(){
     create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});

@@ -12,6 +12,18 @@ create (ele,origin_id,attribute) {
 
     document.getElementById(origin_id).appendChild(element);
 }
+
+clicked (dom,dothing,One=false){
+
+    document.addEventListener("DOMContentLoaded",() => {
+    if (dom) {
+        dom.addEventListener("click", () => {
+            dothing();
+        }, { once: One})
+    }
+    })
+}
+
 }
 
 export default dom;
