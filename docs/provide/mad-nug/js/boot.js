@@ -13,7 +13,11 @@ function boot_button(){
     const button_clicked = new Promise (
         (resolve) => button.addEventListener("click",resolve)
     ).then(
-        () => console.log("button_clicked"))
+        () => {
+            console.log("button_clicked");
+            button.remove();
+        }
+    )
 
 }
 
