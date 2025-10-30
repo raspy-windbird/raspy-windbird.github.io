@@ -13,7 +13,7 @@ async function button_clicked (ele){
     
     if (ele) {
         ele.addEventListener("click", () => {
-            console.log("/boot.js ---SYSTEM STARTED---");
+            console.log("./boot.js ---SYSTEM STARTED---");
             ele.remove();
         }, { once: true });
     }});
