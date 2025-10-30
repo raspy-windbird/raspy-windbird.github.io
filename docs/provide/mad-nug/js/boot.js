@@ -10,7 +10,7 @@ function boot(){
 async function boot_button(){
     await create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
     await button_clicked();
-    await async (()=> {button.remove();})
+    await button.remove();
 }
 
 async function button_clicked (){
