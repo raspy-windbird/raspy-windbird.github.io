@@ -7,7 +7,8 @@ function boot(){
 
 //sub//
 function boot_button(){
-    let button = create("input","boot",{type:"button",value:"SYSTEM"});
+    create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
+    let button = document.getElementById("boot_button");
     button.addEventListener("click",
     function (){
         console.log("abc");
