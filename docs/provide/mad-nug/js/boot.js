@@ -7,7 +7,7 @@ async function boot(){
     const Dom = new dom();
     Dom.create("input","boot",{type:"button",value:"SYSTEM",id:button_id});
     const button = document.getElementById(button_id);
-    Dom.clicked(button,console.log("click");,True);
+    Dom.clicked(button,console.log("click");,true);
 }
 
 
