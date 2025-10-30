@@ -9,15 +9,18 @@ function boot(){
 //boot_button//
 async function boot_button(){
     await create("input","boot",{type:"button",value:"SYSTEM",id:"boot_button"});
-    await button_clicked();
+    
+    const button = document.getElementById("boot_button");
+    
+    await button_clicked(button);
     await button.remove();
 }
 
-async function button_clicked (){
+async function button_clicked (ele){
     document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById("boot_button");
-    if (button) {
-        button.addEventListener("click", () => {
+    
+    if (ele) {
+        ele.addEventListener("click", () => {
             console.log("起動");
         }, { once: true });
     }});
