@@ -2,12 +2,12 @@ import dom from "./assets/dom.js";
 
 async function boot(){
     const Dom = new dom();
-    await Dom.create("input","boot",{type:"button",value:"SYSTEM",id:"boot"});
-    
+    Dom.create("input","boot",{type:"button",value:"SYSTEM",id:"boot"});
     const button = document.getElementById("boot");
     
     await button_clicked(button);
-    await button.remove();
+    
+    button.remove();
 }
 
 async function button_clicked (ele){
