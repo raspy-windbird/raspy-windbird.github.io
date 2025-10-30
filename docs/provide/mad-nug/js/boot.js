@@ -14,7 +14,7 @@ async function button_clicked (ele){
     if (ele) {
         ele.addEventListener("click", () => {
             console.log("/boot.js ---SYSTEM STARTED---");
-            button.remove();
+            ele.remove();
         }, { once: true });
     }});
 }
