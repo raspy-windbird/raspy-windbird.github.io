@@ -1,0 +1,40 @@
+body {
+
+
+.screen::after {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(rgba(255,0,180,0.12) 50%, rgba(0,0,0,0) 50%);
+background-size: 100% 2px;
+mix-blend-mode: multiply;
+opacity: 0.4;
+pointer-events: none;
+}
+
+
+.content {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+font-size: 14px;
+text-shadow: 0 0 6px rgba(255, 100, 200, 0.8);
+}
+
+
+.meta {
+position: absolute;
+top: 8px;
+left: 8px;
+font-size: 11px;
+opacity: 0.8;
+}
+
+
+.monitor-wrap[data-mode="unicorn"] .content { color: #ffbbff; }
+.monitor-wrap[data-mode="destroy"] .content { color: #ff6a6a; text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); }
+.monitor-wrap[data-mode="unicorn"] .meta { color: #ffaaff; }
+.monitor-wrap[data-mode="destroy"] .meta { color: #ff4040; }
