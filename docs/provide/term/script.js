@@ -21,8 +21,8 @@ term.loadAddon(localEcho);
 
 // ターミナルをHTML要素にアタッチし、画面を開く [1]
 term.open(terminalContainer);
-localEcho.writeln('Welcome to Web Serial Terminal (using local-echo)');
-localEcho.writeln('Click "USBデバイスに接続" to begin.');
+term.write('Welcome to Web Serial Terminal (using global variables)\r\n');
+term.write('Click "USBデバイスに接続" to begin.\r\n');
 
 
 let port; // シリアルポートオブジェクトを保持する変数 [1]
@@ -30,7 +30,7 @@ let port; // シリアルポートオブジェクトを保持する変数 [1]
 // 接続ボタンのイベントリスナー [1]
 connectButton.addEventListener('click', async () => {
     if (!('serial' in navigator)) {
-        localEcho.writeln('Error: Web Serial API is not supported in this browser.');
+        term.write('Error: Web Serial API is not supported in this browser.\r\n');
         return;
     }
 
@@ -39,8 +39,8 @@ connectButton.addEventListener('click', async () => {
         port = await navigator.serial.requestPort();
         await port.open({ baudRate: 115200 }); 
 
-        localEcho.writeln('Connected! Baud Rate: 115200.');
-        localEcho.writeln('Type commands below and press Enter to send.');
+        term.write('Connected! Baud Rate: 112500.\r\n');
+        term.write('Type commands below and press Enter to send.\r\n');
 
         // 受信ループ [1]
         const textDecoder = new TextDecoderStream();
@@ -69,7 +69,7 @@ connectButton.addEventListener('click', async () => {
 
     } catch (error) {
         console.error(error);
-        localEcho.writeln(`\r\nConnection error: ${error.message}`);
+        term.write(`\r\nConnection error: ${error.message}\r\n`);
     }
 });
 
