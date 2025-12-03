@@ -27,22 +27,6 @@ term.write('Click "USBデバイスに接続" to begin.\r\n');
 
 
 let port; // シリアルポートオブジェクトを保持する変数 [1]
-setCursorBlink(false); 
-
-function setCursorBlink(enabled) {
-    // xterm.js が生成するカーソル要素を探す
-    const cursorElement = document.querySelector('.xterm-cursor');
-    
-    if (cursorElement) {
-        if (enabled) {
-            // 入力可能: 停止用クラスを削除して点滅させる
-            cursorElement.classList.remove('xterm-cursor-paused');
-        } else {
-            // 入力不可: 停止用クラスを追加して点滅を止める
-            cursorElement.classList.add('xterm-cursor-paused');
-        }
-    }
-}
 
 // 接続ボタンのイベントリスナー [1]
 connectButton.addEventListener('click', async () => {
@@ -59,7 +43,6 @@ connectButton.addEventListener('click', async () => {
 
         term.write('Connected! Baud Rate: 112500.\r\n');
         term.write('Type commands below and press Enter to send.\r\n');
-        setCursorBlink(true); 
         
         // 受信ループ [1]
         const textDecoder = new TextDecoderStream();
@@ -128,7 +111,6 @@ ClearButton.addEventListener('click', () => {
 
 testEchoButton.addEventListener('click', async () => {
     term.write('Echo test mode activated. Type "exit" to quit.\r\n');
-    setCursorBlink(true); 
     while (true) {
         // localEcho.read() が実行されると、キー入力が可能になり、Enter待ち状態になる
         const input = await localEcho.read('>TEST> '); 
@@ -138,7 +120,6 @@ testEchoButton.addEventListener('click', async () => {
         // inputが "exit" だったらループを抜ける
         if (input.toLowerCase() === 'exit') {
             term.write('Exiting echo test mode.\r\n');
-            setCursorBlink(false); 
             break; // whileループを抜ける
         }
     }
