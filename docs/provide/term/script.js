@@ -11,7 +11,7 @@ const testEchoButton = document.getElementById('testEchoButton');
 const term = new Terminal({
     rows: 24,
     cols: 80,
-    cursorBlink: false,
+    cursorBlink: true,
     cursorStyle: 'block',
     convertEol: true
 });
@@ -27,6 +27,7 @@ term.write('Click "USBデバイスに接続" to begin.\r\n');
 
 
 let port; // シリアルポートオブジェクトを保持する変数 [1]
+setCursorBlink(false); 
 
 function setCursorBlink(enabled) {
     // xterm.js が生成するカーソル要素を探す
