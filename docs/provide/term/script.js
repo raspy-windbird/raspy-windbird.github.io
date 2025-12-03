@@ -32,7 +32,7 @@ setCursorBlink(false);
 //カーソルの点滅を管理する関数
 function setCursorBlink(enabled) {
     // xterm.js の setOption メソッドを使用する
-    term.setOption('cursorBlink', enabled);
+    term.options.set('cursorBlink', enabled);
 }
 
 // 接続ボタンのイベントリスナー [1]
