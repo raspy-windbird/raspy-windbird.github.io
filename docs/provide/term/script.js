@@ -19,7 +19,7 @@ const term = new Terminal({
 });
 
 // local-echo コントローラーのインスタンスを作成し、ターミナルにロード [1]
-const localEcho = new LocalEchoController();
+const localEcho = new LocalEchoAddon();
 term.loadAddon(localEcho);
 
 // ターミナルをHTML要素にアタッチし、画面を開く [1]
