@@ -1,7 +1,8 @@
 // script.js (完全なコード)
 
-import { Terminal } from "https://cdn.jsdelivr.net/npm/@gytx/xterm-local-echo@0.1.8/dist/index.modern.min.js";
-import LocalEchoController from "https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js";
+import { Terminal } from "https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js";
+import LocalEchoController from "https://cdn.jsdelivr.net/npm/@gytx/xterm-local-echo@0.1.8/dist/index.modern.min.js";
+
 
 
 // DOM要素を取得 [1]
