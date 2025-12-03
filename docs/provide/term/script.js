@@ -1,6 +1,3 @@
-// script.js (完全なコード)
-
-import { Terminal } from "https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js";
 import { LocalEchoAddon } from "https://cdn.jsdelivr.net/npm/@gytx/xterm-local-echo@0.1.8/dist/index.modern.min.js";
 
 
