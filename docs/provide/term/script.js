@@ -5,6 +5,7 @@ import { LocalEchoAddon } from "https://cdn.jsdelivr.net/npm/@gytx/xterm-local-e
 // DOM要素を取得 [1]
 const connectButton = document.getElementById('connectButton');
 const terminalContainer = document.getElementById('terminal');
+const testEchoButton = document.getElementById('testEchoButton');
 
 // xterm.js インスタンスの初期化と設定 [1]
 const term = new Terminal({
@@ -33,6 +34,7 @@ connectButton.addEventListener('click', async () => {
         term.write('Error: Web Serial API is not supported in this browser.\r\n');
         return;
     }
+    term.write('接続ボタン.動作済\r\n');
 
     try {
         // ポートの選択とオープン、受信・送信ループの開始 [1]
@@ -105,4 +107,21 @@ ClearButton.addEventListener('click', () => {
         + "\x1b[H";
         
     term.write(clearSequence);
+});
+
+testEchoButton.addEventListener('click', async () => {
+    term.write('Echo test mode activated. Type "exit" to quit.\r\n');
+    
+    while (true) {
+        // localEcho.read() が実行されると、キー入力が可能になり、Enter待ち状態になる
+        const input = await localEcho.read('>TEST> '); 
+        
+        console.log("Echo Test Input:", input);
+        
+        // inputが "exit" だったらループを抜ける
+        if (input.toLowerCase() === 'exit') {
+            term.write('Exiting echo test mode.\r\n');
+            break; // whileループを抜ける
+        }
+    }
 });
