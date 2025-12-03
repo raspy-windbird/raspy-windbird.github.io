@@ -27,7 +27,6 @@ term.write('Click "USBデバイスに接続" to begin.\r\n');
 
 
 let port; // シリアルポートオブジェクトを保持する変数 [1]
-terminal.options.cursorBlink = false;
 
 // 接続ボタンのイベントリスナー [1]
 connectButton.addEventListener('click', async () => {
@@ -44,7 +43,7 @@ connectButton.addEventListener('click', async () => {
 
         term.write('Connected! Baud Rate: 112500.\r\n');
         term.write('Type commands below and press Enter to send.\r\n');
-        terminal.options.cursorBlink = true;
+        term.options.set('cursorBlink', true);
         
         // 受信ループ [1]
         const textDecoder = new TextDecoderStream();
@@ -113,7 +112,7 @@ ClearButton.addEventListener('click', () => {
 
 testEchoButton.addEventListener('click', async () => {
     term.write('Echo test mode activated. Type "exit" to quit.\r\n');
-    terminal.options.cursorBlink = true;
+    term.options.set('cursorBlink', true);
     while (true) {
         // localEcho.read() が実行されると、キー入力が可能になり、Enter待ち状態になる
         const input = await localEcho.read('>TEST> '); 
@@ -123,7 +122,7 @@ testEchoButton.addEventListener('click', async () => {
         // inputが "exit" だったらループを抜ける
         if (input.toLowerCase() === 'exit') {
             term.write('Exiting echo test mode.\r\n');
-            terminal.options.cursorBlink = false;
+            term.options.set('cursorBlink', false);
             break; // whileループを抜ける
         }
     }
