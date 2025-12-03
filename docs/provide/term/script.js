@@ -13,7 +13,8 @@ const term = new Terminal({
     cols: 80,
     cursorBlink: true,
     cursorStyle: 'block',
-    convertEol: true
+    convertEol: true,
+    cursorBlink: false
 });
 
 // local-echo コントローラーのインスタンスを作成し、ターミナルにロード [1]
