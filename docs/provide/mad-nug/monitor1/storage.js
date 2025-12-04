@@ -1,4 +1,0 @@
-export function saveState(key, obj) { try { localStorage.setItem(key, JSON.stringify(obj)); return true; } catch { return false; } }
-export function loadState(key, fallback=null) { try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; } catch { return fallback; } }
-export function exportStateAsFile(key, filename='state.json') { const blob=new Blob([JSON.stringify(loadState(key,{}),null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); URL.revokeObjectURL(a.href); }
-export function importStateFromFile(file,key){return new Promise((r,j)=>{const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);saveState(key,o);r(o);}catch(e){j(e);}};rd.onerror=()=>j(rd.error);rd.readAsText(file);});}
