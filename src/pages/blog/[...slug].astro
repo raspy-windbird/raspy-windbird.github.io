@@ -1,0 +1,126 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ArticlePagination from "../../components/ArticlePagination.astro";
+import { getPaginationData } from "../../utils/series";
+
+/**
+ * ブログ記事詳細ページ
+ * URL: /blog/[groupId]/[article-page] など
+ */
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// シリーズ/分割記事の場合、ペジネーション情報を取得
+let paginationData = null;
+if (post.data.groupId) {
+  paginationData = await getPaginationData(post.data.groupId, post.slug);
+}
+
+const dateStr = post.data.date.toLocaleDateString("ja-JP", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+---
+
+<Layout title={post.data.title}>
+  <div class="post-container">
+    <div class="post-header">{post.data.title}</div>
+    <div class="post-meta">
+      <span class="post-date">{dateStr}</span>
+      {
+        post.data.tags && post.data.tags.length > 0 && (
+          <div class="post-tags">
+            {post.data.tags.map((tag) => (
+              <a href={`/blog/tag/${tag}`} class="tag-link">
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <!-- 上部ペジネーション -->
+    {
+      paginationData && (
+        <ArticlePagination paginationData={paginationData} position="top" />
+      )
+    }
+
+    <div class="post-body">
+      <div class="post-content">
+        <Content />
+      </div>
+    </div>
+
+    <!-- 下部ペジネーション -->
+    {
+      paginationData && (
+        <ArticlePagination paginationData={paginationData} position="bottom" />
+      )
+    }
+
+    <p class="return-link">
+      <a href="/blog">[ブログ一覧に戻る]</a>
+    </p>
+  </div>
+</Layout>
+
+<style is:inline>
+  .post-meta {
+    padding: 0 15px;
+    font-size: 12px;
+    color: #666666;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 10px;
+  }
+
+  .post-date {
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  .post-tags {
+    display: inline-block;
+    margin-left: 15px;
+  }
+
+  .tag-link {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 2px 6px;
+    color: #0000ff;
+    text-decoration: underline;
+    font-size: 11px;
+  }
+
+  .tag-link:hover {
+    background-color: #ffffee;
+  }
+
+  .post-content {
+    line-height: 1.8;
+  }
+
+  .post-content p {
+    margin-bottom: 1em;
+  }
+
+  .return-link {
+    text-align: right;
+    margin-top: 20px;
+  }
+</style>

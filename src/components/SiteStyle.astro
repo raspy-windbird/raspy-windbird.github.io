@@ -1,5 +1,7 @@
 ---
+
 ---
+
 <style is:inline>
     body {
         background-color: #dddddd; /* 背景：明るい灰色 */
@@ -68,6 +70,30 @@
         padding: 15px;
     }
 
+    /* 辞書ページ用スタイル */
+    .kana-index {
+        line-height: 2;
+        padding: 8px 0;
+    }
+
+    .kana-link {
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    .kana-disabled {
+        color: #ccc;
+        margin-right: 8px;
+    }
+
+    .kana-section {
+        margin-bottom: 16px;
+    }
+
+    .return-top {
+        text-align: right;
+    }
+
     a {
         color: #0000ff;
         text-decoration: underline;
@@ -76,8 +102,9 @@
         color: #800080;
     }
     a:hover {
-        background-color: #0000ff;
-        color: #ffffff;
+        color: #0056b3;
+        text-decoration: underline;
+        background: none;
     }
 
     .banner-space {

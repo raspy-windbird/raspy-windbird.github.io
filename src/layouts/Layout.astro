@@ -21,7 +21,7 @@ const fullTitle = title === siteName ? siteName : `${title} - ${siteName}`;
         <SiteStyle />
     </head>
     <body>
-        <div class="outer-frame">
+        <div id="top" class="outer-frame">
             <div class="site-header">かめそらの庭</div>
 
             <table class="layout-table">
@@ -29,9 +29,12 @@ const fullTitle = title === siteName ? siteName : `${title} - ${siteName}`;
                     <td class="sidebar">
                         <b>[MENU]</b><br />
                         ・<a href="/">TOPページ</a><br />
+                        <br />
+                        ・<a href="/blog">ブログ</a><br />
                         ・<a href="/diary">雑記</a><br />
-                        ・<a href="/dic">辞書</a><br />
-                        ・<a href="/links">リンク集</a><br /><br />
+                        <br />
+                        ・<a href="/dictionary">辞書</a><br />
+                        ・<a href="/links">リンク集</a><br />
                         ・<a href="/about">このサイトについて</a><br />
                         <br /><br />
                         <Hcard />

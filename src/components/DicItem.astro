@@ -1,5 +1,4 @@
 ---
-// src/components/DicItem.astro
 interface Props {
     title: string;
     kana: string;
@@ -48,12 +47,5 @@ const { title, kana, category } = Astro.props;
     .dic-body-text {
         font-size: 14px;
         line-height: 1.7; /* 行間を広げて「流れるように」読ませる */
-        color: #000000;
-        padding-left: 5px; /* わずかにインデント */
-    }
-
-    /* 2chの「>>1」のようなアンカーへの配慮 */
-    .dic-body-text a {
-        color: #0000ff;
     }
 </style>

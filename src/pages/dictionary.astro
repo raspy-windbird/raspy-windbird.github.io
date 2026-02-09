@@ -1,0 +1,88 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import DicItem from "../components/DicItem.astro";
+
+const dicEntries = (await getCollection("dictionary")).sort((a, b) =>
+    a.data.kana.localeCompare(b.data.kana, "ja"),
+);
+
+// 濁音・半濁音を清音に変換する関数
+const toCleanKana = (str: string) => {
+    return str.normalize("NFD").replace(/[\u3099\u309a]/g, "");
+};
+
+const kanaList =
+    "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ".split(
+        "",
+    );
+
+// 存在する用語の「最初の1文字」を、清音化した状態で抽出
+const existingChars = [
+    ...new Set(dicEntries.map((entry) => toCleanKana(entry.data.kana[0]))),
+];
+---
+
+<Layout title="辞書">
+    <div class="post-container" style="background:#F4F4F4; margin-bottom:20px;">
+        <div class="post-header">五十音索引</div>
+        <div class="post-body" style="line-height: 2;">
+            {
+                kanaList.map((char) =>
+                    existingChars.includes(char) ? (
+                        <a
+                            href={`#char-${char}`}
+                            style="font-weight:bold; margin-right:8px;"
+                        >
+                            [{char}]
+                        </a>
+                    ) : (
+                        <span style="color:#ccc; margin-right:8px;">
+                            [{char}]
+                        </span>
+                    ),
+                )
+            }
+        </div>
+    </div>
+
+    {
+        await Promise.all(
+            dicEntries.map(async (entry, index) => {
+                const { Content } = await entry.render();
+
+                // 現在の用語の頭文字（清音化）
+                const currentFirstChar = toCleanKana(entry.data.kana[0]);
+                // 前の用語の頭文字（清音化）
+                const prevFirstChar =
+                    index > 0
+                        ? toCleanKana(dicEntries[index - 1].data.kana[0])
+                        : null;
+
+                // 頭文字の「清音グループ」が変わった瞬間にIDを打つ
+                const isNewSection =
+                    index === 0 || currentFirstChar !== prevFirstChar;
+
+                return (
+                    <div
+                        id={
+                            isNewSection
+                                ? `char-${currentFirstChar}`
+                                : undefined
+                        }
+                    >
+                        <DicItem
+                            title={entry.data.title}
+                            kana={entry.data.kana}
+                            category={entry.data.category}
+                        >
+                            <Content />
+                        </DicItem>
+                    </div>
+                );
+            }),
+        )
+    }
+
+    <p style="text-align:right;"><a href="#top">[ ページ上部へ戻る ]</a></p>
+</Layout>
