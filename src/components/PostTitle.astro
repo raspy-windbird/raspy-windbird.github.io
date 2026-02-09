@@ -1,0 +1,31 @@
+---
+interface Props {
+    title: string;
+    id?: string;
+}
+const { title, id } = Astro.props;
+---
+
+<div class="post-title-bar" id={id}>
+    {title}
+</div>
+
+<!-- 見出しのすぐ下に中身を表示するためのスロット -->
+<div class="post-title-content">
+    <slot />
+</div>
+
+<style is:inline>
+    .post-title-bar {
+        background-color: #000080;
+        color: #ffffff;
+        padding: 4px 12px;
+        font-weight: bold;
+        font-size: 13px;
+        border: 1px inset #000040;
+        margin-top: 25px;
+    }
+    .post-title-content {
+        padding: 10px 5px; /* 枠はないが、少し余白を設けて読みやすくする */
+    }
+</style>

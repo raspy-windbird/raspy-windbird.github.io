@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import DicItem from "../components/DicItem.astro";
+import { groupByCleanKana, kanaList, toCleanKana } from "../utils";
+
+const dicEntries = (await getCollection("dictionary")).sort((a, b) =>
+    a.data.kana.localeCompare(b.data.kana, "ja"),
+);
+
+// グルーピング（清音化した先頭文字で振り分け）
+const grouped = groupByCleanKana(dicEntries);
+// 目次に表示する既存文字（kanaList の順序に従う）
+const existingChars = kanaList.filter((c) => grouped.has(c));
+---
+
+<Layout title="辞書">
+    <div class="post-container" style="background:#F4F4F4; margin-bottom:20px;">
+        <div class="post-header">五十音索引</div>
+        <div class="post-body kana-index">
+            {
+                kanaList.map((char) =>
+                    existingChars.includes(char) ? (
+                        <a href={`#char-${char}`} class="kana-link">
+                            [{char}]
+                        </a>
+                    ) : (
+                        <span class="kana-disabled">[{char}]</span>
+                    ),
+                )
+            }
+        </div>
+    </div>
+
+    {
+        await Promise.all(
+            // kanaList の順序であるセクションだけレンダリング
+            existingChars.map(async (char) => {
+                const entries = grouped.get(char) ?? [];
+
+                return (
+                    <section id={`char-${char}`} class="kana-section">
+                        <div class="post-container">
+                            <div class="post-header">{char}</div>
+                            <div class="post-body">
+                                {await Promise.all(
+                                    entries.map(async (entry) => {
+                                        const { Content } =
+                                            await entry.render();
+                                        return (
+                                            <DicItem
+                                                title={entry.data.title}
+                                                kana={entry.data.kana}
+                                                category={entry.data.category}
+                                            >
+                                                <Content />
+                                            </DicItem>
+                                        );
+                                    }),
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                );
+            }),
+        )
+    }
+
+    <p style="text-align:right;"><a href="#top">[ ページ上部へ戻る ]</a></p>
+</Layout>

@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+// 全日記を取得し、日付の新しい順にソート
+const diaryEntries = (await getCollection("diary")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+// 日付フォーマット関数（2026/02/08 形式）
+const formatDate = (date: Date) => {
+    return date.toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    });
+};
+---
+
+<Layout title="雑記">
+    <div class="post-container">
+        <div class="post-header">雑記 過去ログ</div>
+        <div class="post-body">
+            <table class="diary-list-table">
+                <thead>
+                    <tr>
+                        <th style={{ width: "70px" }}></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        diaryEntries.map((entry) => (
+                            <tr>
+                                <td class="date-cell">
+                                    {formatDate(entry.data.date)}
+                                </td>
+                                <td class="title-cell">
+                                    <a href={`/diary/${entry.slug}`}>
+                                        {entry.data.title}
+                                    </a>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+
+            {
+                diaryEntries.length === 0 && (
+                    <p>記事がまだありません</p>
+                )
+            }
+        </div>
+    </div>
+
+    <p><a href="/">[戻る]</a></p>
+</Layout>
+
+<style is:inline>
+    /* 日記一覧専用の無機質なテーブルスタイル */
+    .diary-list-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+    .diary-list-table th {
+        background-color: #eeeeee;
+        border: 1px solid #cccccc;
+        padding: 5px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .diary-list-table td {
+        border: 1px solid #cccccc;
+        padding: 8px 5px;
+    }
+    .diary-list-table tr:hover {
+        background-color: #ffffee; /* ホバー時にうっすら黄色く（2ch風） */
+    }
+    .date-cell {
+        color: #666666;
+        font-family: monospace;
+    }
+    .title-cell a {
+        font-weight: bold;
+    }
+    .info-cell {
+        color: #888888;
+        text-align: center;
+    }
+</style>
