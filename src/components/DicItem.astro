@@ -1,0 +1,59 @@
+---
+// src/components/DicItem.astro
+interface Props {
+    title: string;
+    kana: string;
+    category?: string;
+}
+const { title, kana, category } = Astro.props;
+---
+
+<div class="dic-item-minimal">
+    <div class="dic-title-row">
+        <span class="dic-main-title">{title}</span>
+        <span class="dic-sub-info"
+            >（{kana}） {category && `[${category}]`}</span
+        >
+    </div>
+    <div class="dic-body-text">
+        <slot />
+    </div>
+</div>
+
+<style is:inline>
+    .dic-item-minimal {
+        margin-bottom: 35px; /* 用語間の余白をしっかり取る */
+        border-top: 1px solid #000080; /* 上側にだけ細い紺色の線 */
+        padding-top: 5px;
+    }
+
+    .dic-title-row {
+        margin-bottom: 10px;
+        padding: 2px 0;
+    }
+
+    /* 用語名をバーではなく「紺色の文字」にする */
+    .dic-main-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #000080; /* 紺色は文字色として使う */
+        margin-right: 10px;
+    }
+
+    .dic-sub-info {
+        font-size: 11px;
+        color: #666666;
+    }
+
+    .dic-body-text {
+        font-size: 14px;
+        line-height: 1.7; /* 行間を広げて「流れるように」読ませる */
+        color: #000000;
+        padding-left: 5px; /* わずかにインデント */
+    }
+
+    /* 2chの「>>1」のようなアンカーへの配慮 */
+    .dic-body-text a {
+        color: #0000ff;
+    }
+</style>

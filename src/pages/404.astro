@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - ヨシ！">
+  <div class="post-container" style="text-align: center; padding: 50px 20px;">
+    <div class="error-code" style="font-size: 40px; font-weight: bold; color: #000080; margin-bottom: 20px;">
+      404
+    </div>
+
+    <!-- ここにRaspberry Piで減色した現場猫の画像を置く -->
+    <div style="margin: 20px auto; border: 1px solid #000; width: 200px; height: 150px; background: #eee; display: flex; align-items: center; justify-content: center;">
+      <img src="/images/genba-404.gif" alt="現場猫：どうして..." />
+    </div>
+
+    <div class="post-body" style="font-size: 16px;">
+      <p>指定されたページは見つかりませんでしたが、<b>ヨシ！</b></p>
+      <p>入力したURLが間違っている可能性があります。</p>
+      <br />
+      <p><a href="/">[ 入り口へ戻る ]</a></p>
+    </div>
+  </div>
+</Layout>
